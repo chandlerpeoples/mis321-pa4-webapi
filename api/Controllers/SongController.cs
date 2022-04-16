@@ -15,47 +15,46 @@ namespace api.Controllers
     [ApiController]
     public class SongController : ControllerBase
     {
-        // GET: api/Song
+        
         [EnableCors("newpolicy")]
         [HttpGet]
         public List<Song> Get()
         {
-            IReadSongs song = new ReadFromDB();
-            return song.ReadSongs();
+            IReadSongs read = new ReadFromDB();
+            return read.ReadSongs();
         }
 
-        // GET: api/Song/5
+        
         [EnableCors("newpolicy")]
         [HttpGet("{id}", Name = "Get")]
         public Song Get(int temp)
         {
-            IReadSongs readObj = new ReadFromDB();
-            return readObj.ReadOne(temp);
+            IReadSongs read = new ReadFromDB();
+            return read.ReadOne(temp);
         }
 
-        // POST: api/Song
+        
         [HttpPost]
         public void Post([FromBody] Song newSong)
         {
-            ICreateSongs createObj = new WriteToDB();
-            createObj.Create(newSong);
+            ICreateSongs create = new WriteToDB();
+            create.Create(newSong);
         }
 
-        // PUT: api/Song/5
+        
         [HttpPut]
         public void Put([FromBody] Song updatedSong)
         {
-            IUpdateSongs updateObj = new UpdateDatabase();
-            Console.WriteLine(updatedSong);
-            updateObj.Update(updatedSong);
+            IUpdateSongs update = new UpdateDB();
+            update.Update(updatedSong);
         }
 
-        // DELETE: api/Song/5
+        
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            IDeleteSongs deleteObj = new DeleteFromDatabase();
-            deleteObj.Delete(id);
+            IDeleteSongs delete = new DeleteSongFromDB();
+            delete.Delete(id);
         }
     }
 }

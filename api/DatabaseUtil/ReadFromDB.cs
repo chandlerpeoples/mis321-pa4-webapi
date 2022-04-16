@@ -1,5 +1,7 @@
 using api.Interfaces;
 using api.Models;
+using MySql.Data.MySqlClient;
+using MySql.Data;
 
 namespace api.DatabaseUtil
 {
@@ -18,7 +20,7 @@ namespace api.DatabaseUtil
             MySqlDataReader sdr = cmd.ExecuteReader();
             
 
-            return new Song(){SongID = sdr.GetInt32(0), SongTitle = sdr.GetString(1), SongTimestamp = sdr.GetDateTime(2), Deleted = sdr.GetString(3), Favorited = sdr.GetBit(4)};
+            return new Song(){SongID = sdr.GetInt32(0), SongTitle = sdr.GetString(1), SongTimestamp = sdr.GetDateTime(2), Deleted = sdr.GetString(3), Favorited = sdr.GetBoolean(4)};
         }
 
         public List<Song> ReadSongs()
@@ -38,12 +40,11 @@ namespace api.DatabaseUtil
             MySqlDataReader sdr = cmd.ExecuteReader();
             while(sdr.Read())
             {
-                playlist.Add(new Song(){SongID = sdr.GetInt32(0), SongTitle = sdr.GetString(1), SongTimestamp = sdr.GetDateTime(2), Deleted = sdr.GetString(3), Favorited = sdr.GetBit(4)});
+                playlist.Add(new Song(){SongID = sdr.GetInt32(0), SongTitle = sdr.GetString(1), SongTimestamp = sdr.GetDateTime(2), Deleted = sdr.GetString(3), Favorited = sdr.GetBoolean(4)});
             }
 
             con.Close();
             return playlist;
-        }
         }
     }
 }

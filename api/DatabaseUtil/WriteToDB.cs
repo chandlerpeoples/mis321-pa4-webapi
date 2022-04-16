@@ -1,5 +1,7 @@
 using api.Interfaces;
 using api.Models;
+using MySql.Data.MySqlClient;
+using MySql.Data;
 
 namespace api.DatabaseUtil
 {
